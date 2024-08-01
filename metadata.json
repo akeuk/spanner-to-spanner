@@ -1,0 +1,79 @@
+{
+    "name": "Spanner to Cloud Storage CSV",
+    "description": "A Dataflow template for Spanner to Cloud Storage in CSV files",
+    "parameters": [
+      {
+        "name": "spannerProjectId",
+        "groupName": "Source",
+        "label": "Cloud Spanner Project ID",
+        "helpText": "The ID of the Google Cloud project that contains the Spanner database that you want to read data from.",
+        "isOptional": false,
+        "regexes": [
+          "[a-z0-9\\-\\.\\:]+"
+        ],
+        "paramType": "TEXT"
+      },
+      {
+        "name": "spannerInstanceId",
+        "groupName": "Source",
+        "label": "Cloud Spanner Instance ID",
+        "helpText": "The instance ID of the Spanner database that you want to query.",
+        "isOptional": false,
+        "regexes": [
+          "[a-z][a-z0-9\\-]*[a-z0-9]"
+        ],
+        "paramType": "TEXT"
+      },
+      {
+        "name": "spannerDatabaseId",
+        "groupName": "Source",
+        "label": "Cloud Spanner Database ID",
+        "helpText": "The database ID of the Spanner database that you want to export.",
+        "isOptional": false,
+        "regexes": [
+          "[a-z][a-z0-9_\\-]*[a-z0-9]"
+        ],
+        "paramType": "TEXT"
+      },
+      {
+        "name": "sqlQuery",
+        "groupName": "Source",
+        "label": "Cloud Spanner SQL Query",
+        "helpText": "The SQL statement to query Cloud Spanner tables.",
+        "isOptional": false,
+        "paramType": "TEXT"
+      },
+      {
+        "name": "gcsOutput",
+        "groupName": "Target",
+        "label": "Cloud Storage Output directory and file name prefix",
+        "helpText": "The Cloud Storage path to export a CSV file to. The export job creates a new directory under this path that contains the exported files. (Example: gs://your-bucket/your-path/prefix)",
+        "isOptional": false,
+        "regexes": [
+            "^gs:\\/\\/[^\\n\\r]+$"
+        ],
+        "paramType": "GCS_WRITE_FOLDER"
+      },
+      {
+        "name": "spannerPriority",
+        "label": "Priority for Spanner RPC invocations",
+        "helpText": "The request priority for Spanner calls. Possible values are `HIGH`, `MEDIUM`, and `LOW`. The default value is `HIGH`.",
+        "isOptional": true,
+        "regexes": [
+          "^(HIGH|MEDIUM|LOW)$"
+        ],
+        "enumOptions": [
+          {
+            "value": "HIGH"
+          },
+          {
+            "value": "MEDIUM"
+          },
+          {
+            "value": "LOW"
+          }
+        ],
+        "paramType": "ENUM"
+      }
+    ]
+  }
